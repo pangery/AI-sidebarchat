@@ -4,6 +4,7 @@
   "short_name": "AI-sidebarchat",
   "version": "3.6.0",
   "description": "Side panel for ChatGPT, Gemini, Perplexity, Grok, Claude & more. Auto page context. Web mode needs no API key.",
+  "homepage_url": "https://github.com/pangery/AI-sidebarchat",
   "minimum_chrome_version": "109",
   "permissions": [
     "storage",

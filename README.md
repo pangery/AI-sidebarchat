@@ -2,6 +2,9 @@
 
 Rozšíření prohlížeče: postranní AI chat s automatickým kontextem stránky. Funguje v **Chrome, Edge, Opera, Brave** a **Firefox** (Manifest V3).
 
+- **Repozitář:** https://github.com/pangery/AI-sidebarchat  
+- **Zásady soukromí:** https://pangery.github.io/AI-sidebarchat/privacy-policy.html
+
 ## Podporovaní AI agenti (web režim, bez API klíče)
 
 | Agent | Poznámka |

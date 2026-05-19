@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI Sidebar Chat</title>
+  <link rel="stylesheet" href="panel.css">
+</head>
+<body>
+  <header class="header">
+    <div class="brand">
+      <span class="brand-icon" aria-hidden="true">✦</span>
+      <span class="brand-title">AI Sidebar Chat</span>
+    </div>
+    <div class="header-actions">
+      <select id="provider-select" class="provider-select" aria-label="Vybrat AI">
+        <option value="chatgpt">ChatGPT</option>
+        <option value="gemini">Gemini</option>
+        <option value="perplexity">Perplexity</option>
+      </select>
+      <button type="button" id="settings-btn" class="icon-btn" title="Nastavení" aria-label="Nastavení">⚙</button>
+    </div>
+  </header>
+
+  <section class="compose" aria-label="Rychlý dotaz">
+    <form id="ask-form" class="ask-form">
+      <input
+        id="ask-input"
+        type="text"
+        placeholder="Zeptej se na cokoli…"
+        autocomplete="off"
+        spellcheck="true"
+      >
+      <button type="submit" class="send-btn" title="Odeslat" aria-label="Odeslat">↑</button>
+    </form>
+    <div class="quick-actions">
+      <button type="button" class="chip" data-template="summarize">Shrň stránku</button>
+      <button type="button" class="chip" data-template="explain">Vysvětli stránku</button>
+      <button type="button" class="chip" data-template="selection" id="chip-selection" hidden>Vybraný text</button>
+    </div>
+    <p id="page-context" class="page-context hidden"></p>
+  </section>
+
+  <div id="toast" class="toast hidden" role="status"></div>
+
+  <div id="blocked" class="blocked hidden">
+    <p>Službu nelze vložit do panelu.</p>
+    <button type="button" id="open-external" class="btn-secondary">Otevřít v novém okně</button>
+  </div>
+
+  <main class="chat-area">
+    <iframe id="frame" title="AI chat"></iframe>
+  </main>
+
+  <script src="providers.js"></script>
+  <script src="panel.js"></script>
+</body>
+</html>

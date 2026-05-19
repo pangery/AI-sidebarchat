@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8">
+  <title>Nastavení — AI Sidebar Chat</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 600px; margin: 32px auto; padding: 0 20px; line-height: 1.5; color: #0f172a; }
+    h1 { font-size: 22px; }
+    h2 { font-size: 15px; margin-top: 28px; border-bottom: 1px solid #e2e8f0; padding-bottom: 6px; }
+    .hint { color: #64748b; font-size: 13px; margin: 8px 0; }
+    .mode-box {
+      padding: 14px 16px;
+      border-radius: 12px;
+      border: 1px solid #a7f3d0;
+      background: #ecfdf5;
+      margin: 12px 0 20px;
+    }
+    .mode-box label { display: flex; align-items: flex-start; gap: 10px; margin: 10px 0; cursor: pointer; }
+    .mode-box strong { display: block; font-size: 14px; }
+    .mode-box span { font-size: 12px; color: #64748b; }
+    label.block { display: block; margin: 14px 0; }
+    input[type="text"], input[type="password"] {
+      width: 100%; padding: 9px 10px; border: 1px solid #cbd5e1;
+      border-radius: 8px; box-sizing: border-box; margin-top: 4px;
+    }
+    .key-label { font-weight: 600; font-size: 13px; }
+    .provider-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin: 12px 0;
+    }
+    .provider-grid label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 12px;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 13px;
+      margin: 0;
+    }
+    .provider-grid label:has(input:checked) {
+      border-color: #10a37f;
+      background: #ecfdf5;
+    }
+    #apiSection { margin-top: 8px; }
+    #apiSection.is-hidden { display: none; }
+    button {
+      margin-top: 24px; padding: 11px 22px; background: #10a37f;
+      color: #fff; border: none; border-radius: 8px; cursor: pointer; font-size: 14px;
+    }
+    #status { color: #10a37f; margin-top: 12px; }
+    a { color: #10a37f; }
+    code { background: #f1f5f9; padding: 2px 6px; border-radius: 4px; font-size: 12px; }
+    .ai-color-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .ai-color-row input[type="color"] { width: 52px; height: 38px; padding: 2px; border: 1px solid #cbd5e1; border-radius: 8px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h1>AI Sidebar Chat — nastavení</h1>
+  <p class="hint">Výchozí je <strong>Web režim</strong> — žádné API klíče. Stačí být přihlášený na ChatGPT / Gemini v prohlížeči.</p>
+
+  <form id="form">
+    <h2>Režim</h2>
+    <div class="mode-box">
+      <label>
+        <input type="radio" name="mode" id="useWebMode" value="web" checked>
+        <div>
+          <strong>Web režim (doporučeno)</strong>
+          <span>ChatGPT, Gemini, Grok, Perplexity, Claude přímo v panelu. Kontext stránky se zkopíruje automaticky — v chatu jen Ctrl+V.</span>
+        </div>
+      </label>
+      <label>
+        <input type="radio" name="mode" id="useApiMode" value="api">
+        <div>
+          <strong>API režim (plně automatické odpovědi)</strong>
+          <span>Vyžaduje API klíč u každé služby. Odpovědi přímo v panelu bez vkládání.</span>
+        </div>
+      </label>
+    </div>
+
+    <h2>Výchozí AI</h2>
+    <div class="provider-grid">
+      <label><input type="radio" name="apiProvider" value="chatgpt"> ChatGPT</label>
+      <label><input type="radio" name="apiProvider" value="gemini" checked> Gemini</label>
+      <label><input type="radio" name="apiProvider" value="grok"> Grok</label>
+      <label><input type="radio" name="apiProvider" value="perplexity"> Perplexity</label>
+      <label><input type="radio" name="apiProvider" value="claude"> Claude</label>
+      <label><input type="radio" name="apiProvider" value="mistral"> Mistral</label>
+      <label><input type="radio" name="apiProvider" value="deepseek"> DeepSeek</label>
+      <label><input type="radio" name="apiProvider" value="ollama"> Ollama</label>
+    </div>
+
+    <div id="apiSection" class="is-hidden">
+      <h2>API klíče</h2>
+      <p class="hint">Jen pro API režim. Gemini má free tier.</p>
+
+      <label class="block">
+        <span class="key-label">ChatGPT (OpenAI)</span>
+        <input type="password" id="apiKey_openai" placeholder="sk-..." autocomplete="off">
+        <span class="hint"><a href="https://platform.openai.com/api-keys" target="_blank">platform.openai.com/api-keys</a></span>
+      </label>
+
+      <label class="block">
+        <span class="key-label">Google Gemini</span>
+        <input type="password" id="apiKey_gemini" placeholder="AIza..." autocomplete="off">
+        <span class="hint"><a href="https://aistudio.google.com/apikey" target="_blank">aistudio.google.com/apikey</a></span>
+      </label>
+
+      <label class="block">
+        <span class="key-label">Grok (xAI)</span>
+        <input type="password" id="apiKey_grok" placeholder="xai-..." autocomplete="off">
+      </label>
+
+      <label class="block">
+        <span class="key-label">Perplexity</span>
+        <input type="password" id="apiKey_perplexity" placeholder="pplx-..." autocomplete="off">
+      </label>
+
+      <label class="block">
+        <span class="key-label">Anthropic Claude</span>
+        <input type="password" id="apiKey_claude" placeholder="sk-ant-..." autocomplete="off">
+      </label>
+
+      <label class="block">
+        <span class="key-label">Mistral AI</span>
+        <input type="password" id="apiKey_mistral" placeholder="..." autocomplete="off">
+      </label>
+
+      <label class="block">
+        <span class="key-label">DeepSeek</span>
+        <input type="password" id="apiKey_deepseek" placeholder="sk-..." autocomplete="off">
+      </label>
+
+      <h2>Ollama (lokální)</h2>
+      <label class="block">
+        <span class="key-label">URL</span>
+        <input type="text" id="ollamaUrl" value="http://localhost:11434">
+      </label>
+      <label class="block">
+        <span class="key-label">Model</span>
+        <input type="text" id="ollamaModel" value="llama3.2">
+      </label>
+    </div>
+
+    <h2>Vzhled panelu</h2>
+    <label class="block">Šířka panelu: <strong id="optPanelWidthVal">440</strong> px
+      <input type="range" id="panelWidth" min="360" max="560" value="440">
+    </label>
+    <label class="block">Velikost textu: <strong id="optFontSizeVal">14</strong> px
+      <input type="range" id="chatFontSize" min="12" max="18" value="14">
+    </label>
+    <label class="block"><input type="checkbox" id="compactHeader"> Kompaktní záhlaví</label>
+
+    <h2>Barvy chatu</h2>
+    <p class="hint">Stejné nastavení jako ⚙ v panelu na stránce.</p>
+    <label class="block ai-color-row">Hlavní barva <input type="color" id="accentColor" value="#10a37f"></label>
+    <label class="block ai-color-row">Pozadí chatu <input type="color" id="chatBgColor" value="#f8f9fc"></label>
+    <label class="block ai-color-row">Tvoje zprávy <input type="color" id="chatUserColor" value="#10a37f"></label>
+    <label class="block ai-color-row">Odpovědi AI <input type="color" id="chatAssistantColor" value="#ffffff"></label>
+
+    <h2>Chování</h2>
+    <label class="block"><input type="checkbox" id="autoAnalyzeOnOpen"> Automatická odpověď po otevření (jen API režim)</label>
+    <label class="block"><input type="checkbox" id="includePageContext" checked> Posílat text stránky</label>
+    <label class="block"><input type="checkbox" id="includeClickContext" checked> Posílat poslední klik</label>
+    <label class="block"><input type="checkbox" id="showFloatingBall" checked> Zobrazit kouli AI</label>
+
+    <button type="submit">Uložit</button>
+  </form>
+  <p id="status" hidden>Uloženo. Obnov stránku (F5).</p>
+  <script src="browser.js"></script>
+  <script src="providers.js"></script>
+  <script src="options.js"></script>
+</body>
+</html>

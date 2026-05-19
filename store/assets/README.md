@@ -4,7 +4,8 @@
 
 | Soubor | Rozměr | Poznámka |
 |--------|--------|----------|
-| Ikona v ZIP | 128×128 | Už v `icons/icon128.png` — pro store vypadá lépe vlastní logo |
+| **Store icon** | **128×128** | `store/assets/store-icon-128.png` (nahraj v Dashboard → Graphic assets) |
+| Ikona v ZIP | 128×128 | `icons/icon128.png` (součást balíčku, stejný design) |
 | Screenshot 1+ | **1280×800** nebo **640×400** | Panel otevřený na běžné stránce (Wikipedia, článek) |
 | Small promo tile | 440×280 | Volitelné |
 | Marquee | 1400×560 | Volitelné |

@@ -18,9 +18,15 @@
 4. Screenshot celého okna (macOS: ⌘⇧3 nebo ⌘⇧4)  
 5. Ořízni na 1280×800 (Preview, Figma, nebo https://www.screenshotmachine.com)
 
-Ulož sem jako:
+## Hotové soubory (vygenerované)
 
-- `screenshot-1-1280x800.png`
-- `screenshot-2-1280x800.png` (volitelně: výběr jiného AI v dropdownu)
+| Soubor | Rozměr | Kam v Dashboardu |
+|--------|--------|-------------------|
+| `screenshot-1-1280x800.png` | 1280×800 | **Screenshots** (povinné) |
+| `promo-tile-440x280.png` | 440×280 | **Small promo tile** |
+| `marquee-1400x560.png` | 1400×560 | **Marquee promo tile** |
+| `store-icon-128.png` | 128×128 | **Store icon** |
 
-Tyto soubory **nenahrávej do ZIP** rozšíření — jen do Developer Dashboardu v záložce Store listing.
+Přegenerovat: `python3 scripts/generate-store-assets.py`
+
+Tyto soubory **nenahrávej do ZIP** rozšíření — jen do Developer Dashboardu → **Store listing** → **Global assets**.
